@@ -1,0 +1,17 @@
+# Local athlete data and credentials
+.DS_Store
+.env
+.env.*
+!.env.example
+*.fit
+*.FIT
+*.gpx
+*.tcx
+*.har
+*.log
+__pycache__/
+.venv/
+private/
+reports/
+exports/
+local-data/

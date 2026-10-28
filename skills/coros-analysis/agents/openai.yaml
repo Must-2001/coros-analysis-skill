@@ -1,0 +1,4 @@
+interface:
+  display_name: "COROS Analysis"
+  short_description: "Understand training, recovery, sleep, and daily activity"
+  default_prompt: "Use $coros-analysis to review my training, recovery, sleep, and everyday activity against my personal baseline."
