@@ -96,15 +96,17 @@ def render(data, output):
     val = lambda r,k: r[k] if complete(r) and r.get(k) is not None else float('nan')
     metrics = summary(data)
     n = len(dates)
-    fig, axes = plt.subplots(3, 1, figsize=(max(9, min(18, n*.42)), 8), sharex=True)
-    fig.patch.set_facecolor('#f8fafc')
+    plt.rcParams.update({'font.size': 10, 'text.color': '#233d3b', 'axes.labelcolor': '#687b78', 'xtick.color': '#687b78', 'ytick.color': '#687b78'})
+    fig, axes = plt.subplots(3, 1, figsize=(max(11, min(18, n*.42)), 10), sharex=True)
+    fig.patch.set_facecolor('#f5f3ee')
     sports = sorted({a['sport'] for r in daily if complete(r) for a in r.get('training') or []})
-    palette = plt.get_cmap('tab10')
+    colors = ['#244e49', '#b68a58', '#819889', '#8c9eb3', '#b17f75', '#9d91a6']
+    palette = lambda i: colors[i % len(colors)]
     bottoms = [0.]*n
     handles = []
     for i, sport in enumerate(sports):
         values = [sum(a['minutes'] for a in r.get('training') or [] if a['sport']==sport) if complete(r) and r.get('training') is not None else 0 for r in daily]
-        bars = axes[0].bar(range(n), values, bottom=bottoms, color=palette(i%10), label=({'Hike':'徒步','Run':'跑步','Strength':'力量','Swim':'游泳','Hiking':'徒步','Swimming':'游泳'}.get(sport,sport) if zh else sport))
+        bars = axes[0].bar(range(n), values, bottom=bottoms, width=.48, color=palette(i%10), label=({'Hike':'徒步','Run':'跑步','Strength':'力量','Swim':'游泳','Hiking':'徒步','Swimming':'游泳'}.get(sport,sport) if zh else sport))
         handles.append(bars)
         bottoms = [a+b for a,b in zip(bottoms, values)]
     # Explicit markers distinguish unknown training from known empty lists.
@@ -118,36 +120,50 @@ def render(data, output):
     axes[0].set_ylabel('训练（分钟）' if zh else 'Training (min)')
     main = [val(r,'main_sleep_minutes')/60 for r in daily]
     naps = [val(r,'nap_minutes')/60 for r in daily]
-    axes[1].plot(range(n), main, 'o-', color='#2563eb', label='主睡眠（入睡）' if zh else 'Main sleep (asleep)')
+    axes[1].plot(range(n), main, 'o-', linewidth=2.4, markersize=6, markeredgecolor='#f5f3ee', markeredgewidth=1.5, color='#244e49', label='主睡眠（入睡）' if zh else 'Main sleep (asleep)')
     # Naps are separate dots, never silently added to a missing main sleep.
-    axes[1].scatter(range(n), naps, marker='s', color='#a855f7', label='午睡（入睡）' if zh else 'Naps (asleep)')
+    axes[1].scatter(range(n), naps, marker='s', color='#b68a58', label='午睡（入睡）' if zh else 'Naps (asleep)')
     if metrics['main_sleep_median_minutes'] is not None:
-        axes[1].axhline(metrics['main_sleep_median_minutes']/60, linestyle='--', color='#64748b', label='本期观测中位数' if zh else 'Observed-period median')
+        axes[1].axhline(metrics['main_sleep_median_minutes']/60, linestyle=(0,(4,4)), linewidth=1, color='#a7b1aa', label='本期观测中位数' if zh else 'Observed-period median')
     axes[1].set_ylabel('睡眠（小时）' if zh else 'Sleep (hours)')
     axes[1].legend(loc='lower left', bbox_to_anchor=(0,1.01), ncol=3, fontsize=8, frameon=False)
-    axes[2].bar(range(n), [val(r,'steps')/1000 for r in daily], color='#14b8a6')
+    axes[2].bar(range(n), [val(r,'steps')/1000 for r in daily], width=.48, color='#819889')
     axes[2].set_ylabel('步数（千步）' if zh else 'Steps (thousands)')
     for i, r in enumerate(daily):
         if complete(r) and r.get('steps') is None:
             axes[2].text(i,.03,'?', transform=axes[2].get_xaxis_transform(), ha='center', color='#64748b')
     for ax in axes:
-        ax.set_facecolor('white')
+        ax.set_facecolor('#f5f3ee')
         ax.set_ylim(bottom=0)
-        ax.grid(axis='y', alpha=.16)
+        ax.grid(axis='y', color='#c7cfc9', linewidth=.65, alpha=.45)
         ax.set_axisbelow(True)
-        ax.spines[['top','right']].set_visible(False)
+        ax.spines[['top','right','left']].set_visible(False)
+        ax.spines['bottom'].set_color('#c7cfc9')
+        ax.tick_params(axis='both', length=0, pad=9)
         for i,r in enumerate(daily):
             if not complete(r):
                 ax.axvspan(i-.48,i+.48,color='#cbd5e1',alpha=.3)
     stride=max(1,math.ceil(n/14))
-    axes[2].set_xticks(list(range(0,n,stride)), [d.strftime('%m-%d') for d in dates[::stride]], rotation=30)
-    title='训练、睡眠与日常活动' if zh else 'Training, sleep & everyday activity'
+    axes[2].set_xticks(list(range(0,n,stride)), [d.strftime('%m-%d') for d in dates[::stride]], rotation=0)
+    title='每周状态观察' if zh else 'Your week, in perspective.'
+    fig.text(.09,.958,'COROS  /  PERSONAL INSIGHTS',fontsize=10,color='#819889',weight='bold')
+    fig.text(.09,.91,title,fontsize=26,weight='bold',color='#233d3b')
+    subtitle=f"{first} — {last}  ·  {data['timezone']}"
     if data.get('synthetic') is True:
-        title += ' · 虚构示例' if zh else ' · FICTIONAL EXAMPLE'
-    fig.suptitle(f"{title}\n{first} — {last} · {data['timezone']}", fontsize=15, y=.98)
-    note=(f"主睡眠覆盖 {metrics['main_sleep_observed_days']}/{metrics['calendar_days']} 天；? = 该项数据未知；灰色 = 缺失日/未完整日。图示不证明因果。" if zh else f"Main sleep: {metrics['main_sleep_observed_days']}/{metrics['calendar_days']} days. ? = unknown metric; gray = missing/partial day. No causal inference.")
-    fig.text(.06,.025,note,fontsize=8,color='#475569')
-    fig.tight_layout(rect=(.02,.055,.99,.92), h_pad=2.5)
+        subtitle += '  /  虚构示例' if zh else '  /  FICTIONAL EXAMPLE'
+    fig.text(.09,.875,subtitle,fontsize=10,color='#687b78')
+    total=sum(metrics['recorded_training_minutes_by_sport'].values())
+    sleep=metrics['main_sleep_median_minutes']
+    cards=[('已记录训练' if zh else 'RECORDED TRAINING',f'{total:.0f}', '分钟' if zh else 'min'),
+           ('主睡眠中位数' if zh else 'MEDIAN MAIN SLEEP',f'{sleep/60:.1f}' if sleep is not None else '—','小时' if zh else 'hours'),
+           ('主睡眠覆盖' if zh else 'MAIN SLEEP COVERAGE',f"{metrics['main_sleep_observed_days']}/{metrics['calendar_days']}",'天' if zh else 'days')]
+    for x,(label,value,unit) in zip([.09,.40,.71],cards):
+        fig.text(x,.815,label,fontsize=9,color='#687b78')
+        fig.text(x,.775,value,fontsize=23,weight='bold',color='#244e49')
+        fig.text(x+.12,.778,unit,fontsize=10,color='#819889')
+    note=('? = 该项数据未知；灰色 = 缺失日/未完整日。图示不证明因果。' if zh else '? = unknown metric  ·  Gray = missing/partial day  ·  Patterns do not establish causation.')
+    fig.text(.09,.035,note,fontsize=8,color='#687b78')
+    fig.subplots_adjust(left=.09,right=.96,bottom=.09,top=.70,hspace=.65)
     output=Path(output)
     if output.suffix.lower() not in ('.png','.svg'):
         raise ValueError('Output must be .png or .svg')
