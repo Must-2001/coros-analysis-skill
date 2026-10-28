@@ -31,6 +31,10 @@ Prefer within-person changes to population cutoffs. Interpret training exposure,
 
 Use official daily sleep HRV assessments rather than recomputing their average or normal range from raw points. Use COROS metrics as labeled estimates. Current recovery or fitness readings do not provide historical daily values. A single adverse metric does not establish illness, overtraining, or a need to stop training.
 
+## Charts when useful
+
+For a multi-day review, offer or include a compact aligned timeline when it clarifies the answer. Read [references/visualization.md](references/visualization.md) for the normalized data contract and optional renderer. The renderer uses local Python and Matplotlib; it never calls COROS or writes training. Do not invent points for a chart or export personal data without authorization. If a chart is explicitly requested, save a private local artifact outside the public repository. Otherwise an inline table or explanation is sufficient.
+
 ## Deliver
 
 Lead with the most useful answer. Usually include:

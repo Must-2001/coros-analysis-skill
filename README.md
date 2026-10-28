@@ -65,6 +65,14 @@ Every report separates **observations**, **possible explanations**, and **action
 
 See [analysis methods](skills/coros-analysis/references/analysis-methods.md), [tool routing](skills/coros-analysis/references/coros-tools.md), and a [fully fictional bilingual example](examples/weekly-review.md).
 
+## Visual review
+
+The optional renderer creates an aligned timeline of training, sleep, and steps. It preserves sleep gaps, separates naps, and distinguishes unknown activity from confirmed empty records. The chart below uses a separate fictional dataset from the prose example.
+
+![Fictional training, sleep, and steps timeline](examples/weekly-chart.png)
+
+See the [chart input example](examples/weekly-input.json) and [visualization guide](skills/coros-analysis/references/visualization.md). Requires Python 3.10+ and Matplotlib for charts; analysis through MCP does not require running this script.
+
 ## Privacy and control
 
 Analysis is read-only by default. Connecting data does not authorize changes to workouts or plans. Saving or changing training requires a separate explicit request and the appropriate tool workflow. This repository contains no athlete records, credentials, GPS tracks, or device identifiers. Reports stay in the conversation unless you request an export. Never add personal exports to a public contribution.

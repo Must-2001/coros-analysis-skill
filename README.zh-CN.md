@@ -63,6 +63,14 @@ cp -R coros-analysis-skill/skills/coros-analysis \
 
 详见[分析方法](skills/coros-analysis/references/analysis-methods.md)、[工具路由](skills/coros-analysis/references/coros-tools.md)和[中英文虚构示例](examples/weekly-review.md)。
 
+## 可视化复盘
+
+可选绘图工具把训练、睡眠和步数按日期对齐：缺失睡眠保留断点、午睡单独显示，未知训练与确认无记录分别处理。下图使用独立的虚构数据，与文字周报示例不是同一组数据。
+
+![虚构的训练、睡眠和步数时间图](examples/weekly-chart.zh-CN.png)
+
+参见[绘图输入示例](examples/weekly-input.json)和[绘图指南（英文）](skills/coros-analysis/references/visualization.md)。作图需要 Python 3.10+ 和 Matplotlib；仅通过 MCP 分析不需要运行绘图脚本。
+
 ## 隐私与控制
 
 默认只读。连接数据不代表允许修改课程和训练计划；只有你明确提出写入请求，才进入相应修改流程。仓库不包含真实运动记录、凭据、轨迹或设备标识。分析默认留在对话里，只有你要求导出时才保存。请勿向公开仓库提交个人数据。

@@ -8,6 +8,14 @@ For a default seven-day review, compare against the preceding 28 non-overlapping
 
 For metric summaries report valid day count and denominator. Use a median for skewed daily observations when useful; do not call it the official device baseline. Calculate percentage changes only with a valid, nonzero denominator; otherwise use absolute differences. Round to the precision justified by the source. No imputation by default.
 
+## Sleep source reconciliation
+
+Prefer `querySleepOverview` for sleep duration and scope. Some daily-health summaries label the main sleep **period including awake time** as “Total”; that is not interchangeable with main sleep **asleep** or daily sleep including naps. Reconcile the same date's explicit asleep/period/awake fields before interpreting a difference. Never subtract awake twice or average these different definitions together. Keep a field-level source ledger when combining endpoints.
+
+A nap-only day has observed nap sleep but unknown main sleep, not a confirmed extremely short night. Preserve the recorded nap total, flag incomplete main-sleep coverage, and omit it from main-sleep medians. Likewise, unavailable score sentinels (such as -1, or 0 alongside an explicit unavailable-detail message) are missing assessments, not bad sleep scores. Judge missingness from field meaning and source messages, not a universal rule that every zero is missing.
+
+A completed long event in the comparison period can dominate a four-week average. Show weekly totals or the largest sessions alongside the average; do not assume every week was typical or infer a race from distance alone. Avoid conclusions about post-event recovery unless subsequent signals and subjective feedback support them.
+
 ## Units and records
 
 - Normalize durations to seconds for arithmetic, then display readable hours/minutes.

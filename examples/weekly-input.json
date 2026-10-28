@@ -1,0 +1,127 @@
+{
+  "timezone": "Asia/Shanghai",
+  "language": "en",
+  "start_date": "2026-10-05",
+  "end_date": "2026-10-11",
+  "synthetic": true,
+  "days": [
+    {
+      "date": "2026-10-05",
+      "complete": true,
+      "main_sleep_minutes": 405,
+      "nap_minutes": 0,
+      "steps": 5400,
+      "training": [
+        {
+          "sport": "Run",
+          "minutes": 35
+        }
+      ],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "complete": true,
+      "main_sleep_minutes": 430,
+      "nap_minutes": 0,
+      "steps": 6200,
+      "training": [],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    },
+    {
+      "date": "2026-10-07",
+      "complete": true,
+      "main_sleep_minutes": null,
+      "nap_minutes": 45,
+      "steps": 4100,
+      "training": [
+        {
+          "sport": "Strength",
+          "minutes": 30
+        }
+      ],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    },
+    {
+      "date": "2026-10-08",
+      "complete": true,
+      "main_sleep_minutes": 380,
+      "nap_minutes": 0,
+      "steps": 8000,
+      "training": [],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    },
+    {
+      "date": "2026-10-09",
+      "complete": true,
+      "main_sleep_minutes": 465,
+      "nap_minutes": 0,
+      "steps": 5900,
+      "training": [],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    },
+    {
+      "date": "2026-10-10",
+      "complete": true,
+      "main_sleep_minutes": 350,
+      "nap_minutes": 0,
+      "steps": 16500,
+      "training": [
+        {
+          "sport": "Hike",
+          "minutes": 120
+        }
+      ],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "complete": true,
+      "main_sleep_minutes": 450,
+      "nap_minutes": 20,
+      "steps": null,
+      "training": [
+        {
+          "sport": "Swim",
+          "minutes": 25
+        }
+      ],
+      "sources": {
+        "main_sleep_minutes": "Fictional fixture; not COROS athlete data",
+        "nap_minutes": "Fictional fixture; not COROS athlete data",
+        "steps": "Fictional fixture; not COROS athlete data",
+        "training": "Fictional fixture; not COROS athlete data"
+      }
+    }
+  ]
+}
