@@ -35,23 +35,20 @@ Clone this repository, then copy only `skills/coros-analysis` into your personal
 ```bash
 git clone https://github.com/Must-2001/coros-analysis-skill.git
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R coros-analysis-skill/skills/coros-analysis "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R coros-analysis-skill/skills/coros-analysis \
+  "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 If a folder named `coros-analysis` already exists, review or back it up before copying. Start a new conversation after installation if your assistant has not refreshed its skill list. Other assistants may use different skill locations; point them to the same `SKILL.md`.
 
 ## Try it
 
-```text
-Use $coros-analysis to review my last complete week. Compare it with
-my recent baseline, explain the three most meaningful changes, and
-suggest practical adjustments. Reply in English.
-```
+> Use $coros-analysis to review my last complete week. Compare it with
+> my recent baseline, explain the three most meaningful changes, and
+> suggest practical adjustments. Reply in English.
 
-```text
-用 $coros-analysis 综合复盘我最近一个完整周的训练、睡眠和日常活动。
-跟我自己的历史比较，指出最重要的变化、证据和下周的调整建议。
-```
+> 用 $coros-analysis 综合复盘我最近一个完整周的训练、睡眠和日常活动。
+> 跟我自己的历史比较，指出最重要的变化、证据和下周的调整建议。
 
 Other questions:
 
